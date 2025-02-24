@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper flex flex-col items-center md:flex-row md:justify-between">
       <!-- Align "JOB z" to the left corner -->
       <nav class=" text-left w-full md:w-auto">
-        <span class="text-xl font-bold text-white">JOB z</span>
+        <span class="text-xl font-bold text-white">JOB X</span>
       </nav>
 
       <!-- Other content (if any) can go here -->

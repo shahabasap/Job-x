@@ -1,27 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { jobs } from '@/assets/constants';
+import { useJobStore } from '@/store/job';
 import DataTable from '@/components/DataTable.vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 
-
-const filteredJobs = ref(jobs);
-
-// Function to filter jobs
-const applyFilters = (filters: { searchQuery: string; category: string; salary: string }) => {
-  
-  filteredJobs.value = jobs.filter(job =>
-    job.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) &&
-    (filters.category ? job.category === filters.category : true) &&
-    (filters.salary ? job.salary === filters.salary : true)
-  )}
+const jobStore = useJobStore();
 </script>
 
 <template>
   <div class="w-full min-h-screen">
     <div class="flex justify-center p-5">
-      <FilterComponent :data="jobs" @filter="applyFilters"  />
+      <FilterComponent :data="jobStore.filteredJobs" @filter="jobStore.applyFilters" />
     </div>
-    <DataTable :data="filteredJobs" />
+    <DataTable :data="jobStore.filteredJobs" />
   </div>
 </template>

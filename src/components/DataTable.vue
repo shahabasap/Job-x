@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import { computed, defineProps } from 'vue';
+  import { useRouter } from 'vue-router';
+
+const router = useRouter();
   
   // Define Job Type
   type Job = {
@@ -17,9 +20,11 @@
     searchQuery: { type: String, default: '' },
     searchField: { type: String, default: 'title' }
   });
-  const JobDetails=()=>{
-
-  }
+// Navigate to Job Details Page
+const JobDetails = (id: number) => {
+  console.log("working")
+  router.push(`/job/${id}`);
+};
   
   // Extract Headers Dynamically from First Item (Error Handling Included)
   const headers = computed(() => {
@@ -52,10 +57,10 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
-        <tr v-for="item in filteredData" :key="item.id" 
-        @click="JobDetails"
-        :value="item"
-        class="hover:bg-gray-50">
+        <tr v-for="item in filteredData" 
+        :key="item.id"
+        @click="JobDetails(item.id)"
+        class="cursor-pointer hover:bg-gray-50">
           <td v-for="header in headers" :key="header" class="px-6 py-4">
             {{ item[header] ?? 'N/A' }} <!-- Handle missing values -->
           </td>
